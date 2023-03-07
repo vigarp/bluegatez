@@ -1,6 +1,13 @@
 // utilities
-import { Box, createStyles, Header } from "@mantine/core";
+import { Box, createStyles, Divider, Group, Header } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import AppImage from "@components/atoms/images/AppImage";
+
+// icons
+import Logo from "@public/icons/RD_logo.webp";
+import { AppLocale } from "@components/molecules/selects/AppLocale";
+import AppButton from "@components/molecules/buttons/AppButton";
+import AppText from "@components/atoms/typographies/AppText";
 
 // define styles
 const useStyles = createStyles((theme) => ({
@@ -23,7 +30,18 @@ export default function AppHeader() {
         zIndex={2}
         className={classes.header}
       >
-        <div>navybar</div>
+        <Group position="apart" my="xl">
+          <Group position="left">
+            <AppImage src={Logo} width={100} height={100} alt="app-logo" />
+          </Group>
+          <Group position="right">
+            <AppLocale />
+            <Divider orientation="vertical" />
+            <AppButton color="red">
+              <AppText title="Daftar" />
+            </AppButton>
+          </Group>
+        </Group>
       </Header>
     </Box>
   );
