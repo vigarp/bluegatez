@@ -1,9 +1,13 @@
-import { Button, Group } from "@mantine/core";
+import { NextPage } from "next";
+import dynamic from "next/dynamic";
 
-export default function IndexPage() {
-  return (
-    <Group mt={50} position="center">
-      <Button size="xl">Welcome to Mantine!</Button>
-    </Group>
-  );
-}
+const HomePageTemplate = dynamic(
+  () => import("@templates/home/HomePageTemplate"),
+  { ssr: false }
+);
+
+const HomePage: NextPage = () => {
+  return <HomePageTemplate />;
+};
+
+export default HomePage;

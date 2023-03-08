@@ -22,6 +22,7 @@ import AppButton from "@components/molecules/buttons/AppButton";
 import AppText from "@components/atoms/typographies/AppText";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
+import AppLocaleButton from "@components/molecules/buttons/AppLocaleButton";
 
 // define styles
 const useStyles = createStyles((theme) => ({
@@ -115,7 +116,9 @@ export default function AppHeader() {
             </Center>
           </Link>
           <Divider my="sm" color="gray.1" />
-          <AppLocale />
+          <Group position="left" px="md">
+            <AppLocaleButton />
+          </Group>
           <Divider my="sm" color="gray.1" />
         </ScrollArea>
       </Drawer>

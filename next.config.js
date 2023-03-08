@@ -17,4 +17,16 @@ module.exports = withPWA({
     defaultLocale: "id",
     localeDetection: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "asset.cloudinary.com",
+      },
+    ],
+  },
 });
