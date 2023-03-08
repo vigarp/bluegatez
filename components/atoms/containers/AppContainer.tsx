@@ -1,18 +1,16 @@
-import { Container, ContainerProps } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Container, ContainerProps } from "@mantine/core";
 
 interface Props extends ContainerProps {
-  children?: any
+  children?: any;
 }
-const AppContainer: React.FC<Props> = props => {
-  const { children } = props
-  const matchesSM = useMediaQuery('(max-width: 767px)')
+const AppContainer: React.FC<Props> = (props) => {
+  const { children } = props;
 
   return (
-    <Container size="xl" mt={matchesSM ? '9rem' : '5rem'} {...props}>
+    <Container size="xl" mt="5rem" {...props}>
       {children}
     </Container>
-  )
-}
+  );
+};
 
-export default AppContainer
+export default AppContainer;
