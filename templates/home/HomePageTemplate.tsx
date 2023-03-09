@@ -13,6 +13,10 @@ const AppCarousel = dynamic(
   () => import("@components/organisms/carousels/AppCarousel"),
   { ssr: false, loading: () => <Skeleton height={400} width="100%" my="md" /> }
 );
+const SearchFilter = dynamic(
+  () => import("@components/organisms/searchfilter/SearchFilter"),
+  { ssr: false, loading: () => <Skeleton height={100} width="100%" my="md" /> }
+);
 
 const HomePageTemplate: React.FC = () => {
   const dataBanner = [
@@ -42,6 +46,7 @@ const HomePageTemplate: React.FC = () => {
     <Layout>
       <AppContainer mih="150vh" size="xl" py="xl">
         <AppCarousel content={dataBanner} />
+        <SearchFilter />
       </AppContainer>
     </Layout>
   );
