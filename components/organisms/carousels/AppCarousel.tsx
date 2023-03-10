@@ -1,6 +1,5 @@
 import { Carousel } from "@mantine/carousel";
 import { rem } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
@@ -14,7 +13,6 @@ interface Props {
 
 const AppCarousel: React.FC<Props> = ({ content }) => {
   const router = useRouter();
-  const matchesSM = useMediaQuery("(max-width: 767px)");
   return (
     <Carousel
       slideSize="70%"
