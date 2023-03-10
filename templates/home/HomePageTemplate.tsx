@@ -1,4 +1,15 @@
-import { Skeleton } from "@mantine/core";
+import AppText from "@components/atoms/typographies/AppText";
+import AppTitle from "@components/atoms/typographies/AppTitle";
+import AppButton from "@components/molecules/buttons/AppButton";
+import PromoSection from "@components/organisms/sections/PromoSection";
+import {
+  createStyles,
+  Group,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+} from "@mantine/core";
+import { IconChevronRight } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 
 // components
@@ -47,6 +58,9 @@ const HomePageTemplate: React.FC = () => {
       <AppContainer mih="150vh" size="xl" py="xl">
         <AppCarousel content={dataBanner} />
         <SearchFilter />
+
+        {/* promo section */}
+        <PromoSection />
       </AppContainer>
     </Layout>
   );
