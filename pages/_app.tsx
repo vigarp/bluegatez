@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import AppHeader from "../components/global/AppHeader";
+import AppFooter from "@components/global/AppFooter";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -29,6 +30,7 @@ export default function App(props: AppProps) {
         <div style={{ minHeight: "85vh" }}>
           <Component {...pageProps} />
         </div>
+        <AppFooter />
       </MantineProvider>
     </>
   );
