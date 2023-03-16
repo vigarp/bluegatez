@@ -1,12 +1,16 @@
+import dynamic from "next/dynamic";
 import { createStyles, Group, Menu, rem, UnstyledButton } from "@mantine/core";
 import { useEffect, useState } from "react";
-import AppImage from "@components/atoms/images/AppImage";
 import { IconChevronDown } from "@tabler/icons-react";
 
 // icons
 import idFlag from "@public/icons/id.svg";
 import enFlag from "@public/icons/en.svg";
 import { useRouter } from "next/router";
+
+const AppImage = dynamic(() => import("@components/atoms/images/AppImage"), {
+  ssr: false,
+});
 
 const localizationData = [
   { label: "Indonesia", locale: "id", image: idFlag },
@@ -49,7 +53,7 @@ const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   },
 }));
 
-export function AppLocale() {
+const AppLocale: React.FC = () => {
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles({ opened });
   const [selected, setSelected] = useState(localizationData[0]);
@@ -110,4 +114,6 @@ export function AppLocale() {
       <Menu.Dropdown>{localizationItems}</Menu.Dropdown>
     </Menu>
   );
-}
+};
+
+export default AppLocale;

@@ -1,4 +1,4 @@
-import AppButton from "@components/molecules/buttons/AppButton";
+import dynamic from "next/dynamic";
 import {
   Autocomplete,
   createStyles,
@@ -11,16 +11,19 @@ import {
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import {
-  IconBed,
   IconCalendarEvent,
   IconChevronDown,
   IconMapPin,
   IconSearch,
 } from "@tabler/icons-react";
 
+const AppButton = dynamic(
+  () => import("@components/molecules/buttons/AppButton"),
+  { ssr: false }
+);
+
 const useStyles = createStyles((theme) => ({
   searchFilterContainer: {
-    position: "sticky",
     top: -30,
   },
   paperContainer: {
@@ -54,7 +57,7 @@ const allDates = [
   "Desember-2023",
 ];
 
-const SearchFilter = () => {
+const SearchFilter: React.FC = () => {
   // initial configs
   const { classes } = useStyles();
   const matchesLG = useMediaQuery("(max-width: 1200px)");

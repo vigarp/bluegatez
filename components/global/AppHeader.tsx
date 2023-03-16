@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 // utilities
 import {
   Box,
@@ -6,23 +8,32 @@ import {
   createStyles,
   Divider,
   Drawer,
-  Grid,
   Group,
   Header,
   ScrollArea,
-  UnstyledButton,
 } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import AppImage from "@components/atoms/images/AppImage";
 
 // icons
 import Logo from "@public/icons/RD_logo.webp";
-import { AppLocale } from "@components/molecules/selects/AppLocale";
-import AppButton from "@components/molecules/buttons/AppButton";
 import AppText from "@components/atoms/typographies/AppText";
-import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
-import AppLocaleButton from "@components/molecules/buttons/AppLocaleButton";
+
+const AppLocale = dynamic(
+  () => import("@components/molecules/selects/AppLocale"),
+  { ssr: false }
+);
+
+const AppButton = dynamic(
+  () => import("@components/molecules/buttons/AppButton"),
+  { ssr: false }
+);
+
+const AppLocaleButton = dynamic(
+  () => import("@components/molecules/buttons/AppLocaleButton"),
+  { ssr: false }
+);
 
 // define styles
 const useStyles = createStyles((theme) => ({
@@ -62,7 +73,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function AppHeader() {
+const AppHeader: React.FC = () => {
   // initial configs
   const { classes } = useStyles();
 
@@ -75,7 +86,7 @@ export default function AppHeader() {
         height={80}
         px="md"
         pos="fixed"
-        zIndex={2}
+        zIndex={10}
         className={classes.header}
       >
         <Group position="apart" my="xl">
@@ -124,4 +135,6 @@ export default function AppHeader() {
       </Drawer>
     </Box>
   );
-}
+};
+
+export default AppHeader;

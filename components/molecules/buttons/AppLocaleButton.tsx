@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const AppLocaleButton = () => {
+const AppLocaleButton: React.FC = () => {
   const router = useRouter();
   const { classes } = useStyles();
 

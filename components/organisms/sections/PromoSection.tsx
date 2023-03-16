@@ -1,6 +1,3 @@
-import AppImage from "@components/atoms/images/AppImage";
-import AppTitle from "@components/atoms/typographies/AppTitle";
-import AppButton from "@components/molecules/buttons/AppButton";
 import {
   Box,
   createStyles,
@@ -12,6 +9,19 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconChevronRight } from "@tabler/icons-react";
+import dynamic from "next/dynamic";
+
+const AppImage = dynamic(() => import("@components/atoms/images/AppImage"), {
+  ssr: false,
+});
+const AppButton = dynamic(
+  () => import("@components/molecules/buttons/AppButton"),
+  { ssr: false }
+);
+const AppTitle = dynamic(
+  () => import("@components/atoms/typographies/AppTitle"),
+  { ssr: false }
+);
 
 const useStyles = createStyles({
   headerTitle: {
@@ -33,7 +43,7 @@ const useStyles = createStyles({
   },
 });
 
-const PromoSection = () => {
+const PromoSection: React.FC = () => {
   const { classes } = useStyles();
   const matchesSM = useMediaQuery("(max-width: 48em)");
   return (
