@@ -11,7 +11,6 @@ import {
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import {
-  IconBed,
   IconCalendarEvent,
   IconChevronDown,
   IconMapPin,
@@ -20,7 +19,6 @@ import {
 
 const useStyles = createStyles((theme) => ({
   searchFilterContainer: {
-    position: "sticky",
     top: -30,
   },
   paperContainer: {
