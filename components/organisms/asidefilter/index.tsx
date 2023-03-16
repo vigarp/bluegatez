@@ -1,25 +1,29 @@
-import AppTitle from "@components/atoms/typographies/AppTitle";
-import AppButton from "@components/molecules/buttons/AppButton";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
 import {
   Checkbox,
-  createStyles,
   Flex,
-  Group,
   Navbar,
   RangeSlider,
   ScrollArea,
-  Slider,
   Stack,
   Text,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { CurrencyIDR } from "@utils/libs/formatter";
-import { useState } from "react";
 
-const useStyles = createStyles((theme) => ({}));
+const AppTitle = dynamic(
+  () => import("@components/atoms/typographies/AppTitle"),
+  { ssr: false }
+);
+
+const AppButton = dynamic(
+  () => import("@components/molecules/buttons/AppButton"),
+  { ssr: false }
+);
 
 const AsideFilter: React.FC = () => {
-  const { classes } = useStyles();
   const [sliderValues, setSliderValues] = useState<[number, number]>([
     100000, 400000,
   ]);

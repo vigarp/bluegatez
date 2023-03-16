@@ -1,16 +1,19 @@
-import AppContainer from "@components/atoms/containers/AppContainer";
 import Layout from "@components/global/Layout";
-import AsideFilter from "@components/organisms/asidefilter";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const AppContainer = dynamic(
+  () => import("@components/atoms/containers/AppContainer"),
+  {
+    ssr: false,
+  }
+);
+
+const AsideFilter = dynamic(() => import("@components/organisms/asidefilter"), {
+  ssr: false,
+});
 
 const FilteredHotels: NextPage = () => {
-  const router = useRouter();
-  const { country, city } = router.query;
-
-  console.log("====================================");
-  console.log(router.query);
-  console.log("====================================");
   return (
     <Layout title="Filter Hotels - Blue Gatez">
       <AppContainer py="xl">
