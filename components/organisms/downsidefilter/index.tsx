@@ -1,10 +1,8 @@
-import dynamic from "next/dynamic";
-import { useState } from "react";
-
 import {
   Checkbox,
+  Drawer,
+  DrawerProps,
   Flex,
-  Navbar,
   RangeSlider,
   ScrollArea,
   Stack,
@@ -12,6 +10,20 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { CurrencyIDR } from "@utils/libs/formatter";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
+interface Props extends DrawerProps {
+  opened: any;
+  onClose: any;
+}
+
+const AppText = dynamic(
+  () => import("@components/atoms/typographies/AppText"),
+  {
+    ssr: false,
+  }
+);
 
 const AppTitle = dynamic(
   () => import("@components/atoms/typographies/AppTitle"),
@@ -23,7 +35,9 @@ const AppButton = dynamic(
   { ssr: false }
 );
 
-const AsideFilter: React.FC = () => {
+const DownsideFilter: React.FC<Props> = (props) => {
+  const { opened, onClose } = props;
+
   const [sliderValues, setSliderValues] = useState<[number, number]>([
     100000, 400000,
   ]);
@@ -34,9 +48,15 @@ const AsideFilter: React.FC = () => {
       termsOfService: false,
     },
   });
+
   return (
-    <Navbar height={750} width={{ sm: 300, md: 400 }}>
-      <Navbar.Section grow component={ScrollArea} mx="xl">
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      position="bottom"
+      title={<AppText title="Filter" color="dimmed" fz={13} fw={600} />}
+    >
+      <ScrollArea sx={{ height: "calc(100vh - 60px)" }}>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <Stack my="xl">
             <AppTitle title="Rekomendasi BlueGatez" fz={16} />
@@ -105,9 +125,9 @@ const AsideFilter: React.FC = () => {
             </AppButton>
           </Stack>
         </form>
-      </Navbar.Section>
-    </Navbar>
+      </ScrollArea>
+    </Drawer>
   );
 };
 
-export default AsideFilter;
+export default DownsideFilter;

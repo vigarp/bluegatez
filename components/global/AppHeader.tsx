@@ -86,7 +86,7 @@ const AppHeader: React.FC = () => {
         height={80}
         px="md"
         pos="fixed"
-        zIndex={10}
+        zIndex={100}
         className={classes.header}
       >
         <Group position="apart" my="xl">
