@@ -35,7 +35,7 @@ const AsideFilter: React.FC = () => {
     },
   });
   return (
-    <Navbar height={750} width={{ sm: 400 }}>
+    <Navbar height={750} width={{ sm: 300, md: 400 }}>
       <Navbar.Section grow component={ScrollArea} mx="xl">
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <Stack my="xl">
