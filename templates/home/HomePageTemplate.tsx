@@ -1,15 +1,4 @@
-import AppText from "@components/atoms/typographies/AppText";
-import AppTitle from "@components/atoms/typographies/AppTitle";
-import AppButton from "@components/molecules/buttons/AppButton";
-import PromoSection from "@components/organisms/sections/PromoSection";
-import {
-  createStyles,
-  Group,
-  SimpleGrid,
-  Skeleton,
-  Stack,
-} from "@mantine/core";
-import { IconChevronRight } from "@tabler/icons-react";
+import { Skeleton } from "@mantine/core";
 import dynamic from "next/dynamic";
 
 // components
@@ -26,6 +15,10 @@ const AppCarousel = dynamic(
 );
 const SearchFilter = dynamic(
   () => import("@components/organisms/searchfilter/SearchFilter"),
+  { ssr: false, loading: () => <Skeleton height={100} width="100%" my="md" /> }
+);
+const PromoSection = dynamic(
+  () => import("@components/organisms/sections/PromoSection"),
   { ssr: false, loading: () => <Skeleton height={100} width="100%" my="md" /> }
 );
 
