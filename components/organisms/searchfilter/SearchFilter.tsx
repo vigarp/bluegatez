@@ -60,7 +60,7 @@ const allDates = [
 const SearchFilter: React.FC = () => {
   // initial configs
   const { classes } = useStyles();
-  const matchesLG = useMediaQuery("(max-width: 1200px)");
+  const matchesMD = useMediaQuery("(max-width: 62em)");
 
   const form = useForm({
     initialValues: {
@@ -80,9 +80,9 @@ const SearchFilter: React.FC = () => {
           )}
         >
           <SimpleGrid
-            cols={matchesLG ? 1 : 5}
-            p={!matchesLG ? "xl" : "md"}
-            spacing={!matchesLG ? "lg" : 3}
+            cols={matchesMD ? 1 : 5}
+            p={!matchesMD ? "xl" : "md"}
+            spacing={!matchesMD ? "lg" : 3}
           >
             <Autocomplete
               icon={<IconMapPin />}

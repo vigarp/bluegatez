@@ -1,6 +1,6 @@
 import Layout from "@components/global/Layout";
-import { Box, Col, createStyles, Grid, Group } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Box, Col, createStyles, Grid, Group, Skeleton } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { IconFilter } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 
@@ -19,6 +19,14 @@ const AppButton = dynamic(
   () => import("@components/molecules/buttons/AppButton"),
   {
     ssr: false,
+  }
+);
+
+const SearchFilter = dynamic(
+  () => import("@components/organisms/searchfilter/SearchFilter"),
+  {
+    ssr: false,
+    loading: () => <AppLoader />,
   }
 );
 
@@ -46,18 +54,23 @@ const Cards = dynamic(
   }
 );
 
+const PromoSection = dynamic(
+  () => import("@components/organisms/sections/PromoSection"),
+  { ssr: false, loading: () => <Skeleton height={100} width="100%" my="md" /> }
+);
+
 // define styles
 const useStyles = createStyles((theme) => ({
   header: {
     boxShadow: theme.shadows.sm,
   },
   hiddenDesktop: {
-    [theme.fn.largerThan("sm")]: {
+    [theme.fn.largerThan("md")]: {
       display: "none",
     },
   },
   hiddenMobile: {
-    [theme.fn.smallerThan("sm")]: {
+    [theme.fn.smallerThan("md")]: {
       display: "none",
     },
   },
@@ -66,6 +79,7 @@ const useStyles = createStyles((theme) => ({
 const ListHotelsTemplate: React.FC = () => {
   // initial configs
   const { classes } = useStyles();
+  const matchesMD = useMediaQuery("(max-width: 62em)");
 
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -73,6 +87,7 @@ const ListHotelsTemplate: React.FC = () => {
   return (
     <Layout title="Filter Hotels - Blue Gatez">
       <AppContainer py="xl">
+        <SearchFilter />
         <Group className={classes.hiddenDesktop}>
           <AppButton
             color="red"
@@ -83,7 +98,7 @@ const ListHotelsTemplate: React.FC = () => {
           </AppButton>
         </Group>
         <Grid>
-          <Col span="content">
+          <Col span={4}>
             <Box className={classes.hiddenMobile}>
               <AsideFilter />
             </Box>
@@ -91,10 +106,12 @@ const ListHotelsTemplate: React.FC = () => {
               <DownsideFilter opened={drawerOpened} onClose={closeDrawer} />
             </Box>
           </Col>
-          <Col span={6}>
+          <Col span={matchesMD ? 12 : 8}>
             <Cards />
           </Col>
         </Grid>
+        {/* promo section */}
+        <PromoSection />
       </AppContainer>
     </Layout>
   );

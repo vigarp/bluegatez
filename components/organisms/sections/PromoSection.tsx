@@ -1,12 +1,4 @@
-import {
-  Box,
-  createStyles,
-  Flex,
-  Grid,
-  Group,
-  SimpleGrid,
-  Stack,
-} from "@mantine/core";
+import { Box, createStyles, Flex, Grid, Group, Stack } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconChevronRight } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
