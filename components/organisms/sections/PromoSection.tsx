@@ -1,4 +1,14 @@
-import { Box, createStyles, Flex, Grid, Group, Stack } from "@mantine/core";
+import {
+  Box,
+  createStyles,
+  Flex,
+  Grid,
+  Group,
+  rem,
+  SimpleGrid,
+  Stack,
+  useMantineTheme,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconChevronRight } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
@@ -14,6 +24,8 @@ const AppTitle = dynamic(
   () => import("@components/atoms/typographies/AppTitle"),
   { ssr: false }
 );
+
+const PRIMARY_COL_HEIGHT = rem(400);
 
 const useStyles = createStyles({
   headerTitle: {
@@ -36,8 +48,10 @@ const useStyles = createStyles({
 });
 
 const PromoSection: React.FC = () => {
+  const theme = useMantineTheme();
+  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
   const { classes } = useStyles();
-  const matchesSM = useMediaQuery("(max-width: 48em)");
+
   return (
     <Stack py="xl" spacing="xl">
       <Group position="apart">
@@ -57,30 +71,31 @@ const PromoSection: React.FC = () => {
           </AppButton>
         </Group>
       </Group>
-
-      <Grid grow>
-        <Grid.Col span={matchesSM ? 12 : 6} mih={matchesSM ? 250 : 500}>
-          <Box
-            sx={() => ({
-              height: "100%",
-              position: "relative",
-            })}
-          >
-            <AppImage
-              src="https://res.cloudinary.com/vigarp/image/upload/v1678460128/samples/27356541_qiosvq.jpg"
-              alt="logo"
-              fill
-              style={{ objectFit: "fill", borderRadius: "10px" }}
-            />
-          </Box>
-        </Grid.Col>
-        <Grid.Col span={6} mih={500}>
-          <Flex mih="50%" justify="space-between">
+      <SimpleGrid
+        cols={2}
+        spacing="md"
+        breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+      >
+        <Box
+          sx={() => ({
+            height: "100%",
+            position: "relative",
+          })}
+        >
+          <AppImage
+            src="https://res.cloudinary.com/vigarp/image/upload/v1678460128/samples/27356541_qiosvq.jpg"
+            alt="logo"
+            fill
+            style={{ objectFit: "fill", borderRadius: "10px" }}
+          />
+        </Box>
+        <Grid gutter="md">
+          <Grid.Col>
             <Box
               sx={() => ({
-                width: "50%",
                 margin: "0rem 0.5rem 1rem 0rem",
                 position: "relative",
+                height: SECONDARY_COL_HEIGHT,
               })}
             >
               <AppImage
@@ -90,11 +105,28 @@ const PromoSection: React.FC = () => {
                 style={{ objectFit: "fill", borderRadius: "10px" }}
               />
             </Box>
+          </Grid.Col>
+          <Grid.Col span={6}>
             <Box
               sx={() => ({
-                width: "50%",
+                position: "relative",
+                height: SECONDARY_COL_HEIGHT,
+              })}
+            >
+              <AppImage
+                src="https://res.cloudinary.com/vigarp/image/upload/v1678460306/samples/27356223_xa7r2q.jpg"
+                alt="logo"
+                fill
+                style={{ objectFit: "fill", borderRadius: "10px" }}
+              />
+            </Box>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Box
+              sx={() => ({
                 margin: "0rem 0rem 1rem 0.5rem",
                 position: "relative",
+                height: SECONDARY_COL_HEIGHT,
               })}
             >
               <AppImage
@@ -104,22 +136,9 @@ const PromoSection: React.FC = () => {
                 style={{ objectFit: "fill", borderRadius: "10px" }}
               />
             </Box>
-          </Flex>
-          <Box
-            sx={() => ({
-              height: "50%",
-              position: "relative",
-            })}
-          >
-            <AppImage
-              src="https://res.cloudinary.com/vigarp/image/upload/v1678460306/samples/27356223_xa7r2q.jpg"
-              alt="logo"
-              fill
-              style={{ objectFit: "fill", borderRadius: "10px" }}
-            />
-          </Box>
-        </Grid.Col>
-      </Grid>
+          </Grid.Col>
+        </Grid>
+      </SimpleGrid>
     </Stack>
   );
 };
